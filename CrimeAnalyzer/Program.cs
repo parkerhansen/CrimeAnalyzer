@@ -10,7 +10,7 @@ namespace CrimeAnalyzer
 
         static void Main(string[] args)
         {
-            if (args.Length < 2 || args.Lenght > 2)
+            if (args.Length < 2 || args.Length > 2)
             {
                 Console.WriteLine("Not enough arguments. Please enter a source file and report file.");
                 return;
@@ -25,7 +25,7 @@ namespace CrimeAnalyzer
 
             try
             {
-                sourceFile = StreamReader(sFile);
+                sourceFile = new StreamReader(sFile);
                 sourceFile.ReadLine();
 
                 while(sourceFile.EndOfStream == true)
@@ -51,20 +51,20 @@ namespace CrimeAnalyzer
                         continue;
                     }
 
-                    crimeData crimes = new crimeData(year, population, violentCrime, murder, rape, robbery, aggravatedAssault, propertyCrime, burglary, theft, mvTheft);
+                    CrimeData crimes = new CrimeData(year, population, violentCrime, murder, rape, robbery, aggravatedAssault, propertyCrime, burglary, theft, mvTheft);
                     crimeData.Add(crimes);
                 }
-            }
-
-            catch (Exception)
-            {
-                Console.WriteLine("Error: Source file can't be opened.");
-                return;
             }
 
             catch (FormatException)
             {
                 Console.WriteLine("Error: Source file contains data that is not of the right type. Make sure all data is numerical.");
+                return;
+            }
+
+            catch (Exception)
+            {
+                Console.WriteLine("Error: Source file can't be opened.");
                 return;
             }
 
@@ -76,12 +76,12 @@ namespace CrimeAnalyzer
                 }
             }
 
-            CreateReport (CrimeData, rFile);
+            //CreateReport(crimeData, rFile);
 
-        }
+//        }
 
-        public static void CreateReport(List<CrimeData> crimeData, string rFile)
-        {
+//        public static void CreateReport<CrimeStats>(List<CrimeStats> data, string rFile)
+//        {
             StreamWriter report = null;
 
             try
@@ -89,7 +89,7 @@ namespace CrimeAnalyzer
                 report = new StreamWriter(rFile);
                 report.WriteLine("Crime Analyzer Report");
 
-                int yearData = from CrimeData in crimeData select CrimeData.year;
+                var yearData = from CrimeData in crimeData select CrimeData.year;
                 int numYear = yearData.Count();
                 int begYear = yearData.Max();
                 int endYear = yearData.Min();
