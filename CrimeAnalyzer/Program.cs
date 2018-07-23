@@ -76,11 +76,11 @@ namespace CrimeAnalyzer
                 }
             }
 
-            createReport (CrimeData, rFile);
+            CreateReport (CrimeData, rFile);
 
         }
 
-        public static void CreateReport (List<CrimeData> crimeData, string rFile)
+        public static void CreateReport(List<CrimeData> crimeData, string rFile)
         {
             StreamWriter report = null;
 
