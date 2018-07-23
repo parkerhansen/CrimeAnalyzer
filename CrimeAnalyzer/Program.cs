@@ -1,4 +1,5 @@
 ﻿using System;
+//using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,8 @@ namespace CrimeAnalyzer
 {
     class Program
     {
+
+        public List<CrimeData> crimeData = new List<CrimeData>();
 
         static void Main(string[] args)
         {
@@ -19,7 +22,7 @@ namespace CrimeAnalyzer
             string sFile = args[2];
             string rFile = args[1];
 
-            List<CrimeData> crimeData = new List<CrimeData>();
+//            List<CrimeData> crimeData = new List<CrimeData>();
 
             StreamReader sourceFile = null;
 
