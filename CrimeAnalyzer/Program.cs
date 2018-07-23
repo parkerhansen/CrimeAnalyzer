@@ -7,6 +7,7 @@ namespace CrimeAnalyzer
 {
     class Program
     {
+
         static void Main(string[] args)
         {
             if (args.Length < 2 || args.Lenght > 2)
@@ -15,14 +16,16 @@ namespace CrimeAnalyzer
                 return;
             }
 
-            string sfile = args[2];
-            string rfile = args[1];
+            string sFile = args[2];
+            string rFile = args[1];
+
+            List<CrimeData> crimeData = new List<CrimeData>();
 
             StreamReader sourceFile = null;
 
             try
             {
-                sourceFile = StreamReader(sfile);
+                sourceFile = StreamReader(sFile);
                 sourceFile.ReadLine();
 
                 while(sourceFile.EndOfStream == true)
@@ -47,6 +50,9 @@ namespace CrimeAnalyzer
                         Console.WriteLine("Row does not contain the correct number of data elements. Each row should have 11 data elements.");
                         continue;
                     }
+
+                    crimeData crimes = new crimeData(year, population, violentCrime, murder, rape, robbery, aggravatedAssault, propertyCrime, burglary, theft, mvTheft);
+                    crimeData.Add(crimes);
                 }
             }
 
@@ -67,6 +73,40 @@ namespace CrimeAnalyzer
                 if (sourceFile != null)
                 {
                     sourceFile.Close();
+                }
+            }
+
+            createReport (CrimeData, rFile);
+
+        }
+
+        public static void CreateReport (List<CrimeData> crimeData, string rFile)
+        {
+            StreamWriter report = null;
+
+            try
+            {
+                report = new StreamWriter(rFile);
+                report.WriteLine("Crime Analyzer Report");
+
+                int yearData = from CrimeData in crimeData select CrimeData.year;
+                int numYear = yearData.Count();
+                int begYear = yearData.Max();
+                int endYear = yearData.Min();
+                report.WriteLine("Period: {0}-{1} ({2} years)", begYear, endYear, numYear);
+
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Unable to create report: {0}", e.Message);
+            }
+
+            finally
+            {
+                if (report != null)
+                {
+                    report.Close();
                 }
             }
         }
