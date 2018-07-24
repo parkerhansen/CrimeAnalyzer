@@ -81,7 +81,7 @@ namespace CrimeAnalyzer
 
             catch (FormatException)
             {
-                Console.WriteLine("Error: Source file contains data that is not of the right type. Make sure all data is numerical. Report was not created.");
+                Console.WriteLine("Error: Source file contains data that is not of the right type on row {0} of data. Make sure all data is numerical. Report was not created.", count);
                 return;
             }
 
