@@ -1,15 +1,27 @@
 ﻿using System;
-//using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace CrimeAnalyzer
 {
+    public class CrimeData
+    {
+        public int CrimeYear { get; set; }
+        public int CrimePop { get; set; }
+        public int CrimeVC { get; set; }
+        public int CrimeMurder { get; set; }
+        public int CrimeRape { get; set; }
+        public int CrimeRobbery { get; set; }
+        public int CrimeAggA { get; set; }
+        public int CrimePC { get; set; }
+        public int CrimeBurg { get; set; }
+        public int CrimeTheft { get; set; }
+        public int CrimeMVTheft { get; set; }
+    }
+
     class Program
     {
-
-        public List<CrimeData> crimeData = new List<CrimeData>();
 
         static void Main(string[] args)
         {
@@ -22,7 +34,7 @@ namespace CrimeAnalyzer
             string sFile = args[2];
             string rFile = args[1];
 
-//            List<CrimeData> crimeData = new List<CrimeData>();
+            List<CrimeData> crimeData = new List<CrimeData>();
 
             StreamReader sourceFile = null;
 
@@ -54,7 +66,7 @@ namespace CrimeAnalyzer
                         continue;
                     }
 
-                    CrimeData crimes = new CrimeData(year, population, violentCrime, murder, rape, robbery, aggravatedAssault, propertyCrime, burglary, theft, mvTheft);
+                    CrimeData crimes = new CrimeData() { CrimeYear = year, CrimePop = population, CrimeVC = violentCrime, CrimeMurder = murder, CrimeRape = rape, CrimeRobbery = robbery, CrimeAggA = aggravatedAssault, CrimePC = propertyCrime, CrimeBurg = burglary, CrimeTheft = theft, CrimeMVTheft = mvTheft  };
                     crimeData.Add(crimes);
                 }
             }
@@ -92,7 +104,7 @@ namespace CrimeAnalyzer
                 report = new StreamWriter(rFile);
                 report.WriteLine("Crime Analyzer Report");
 
-                var yearData = from CrimeData in crimeData select CrimeData.year;
+                var yearData = from CrimeData in crimeData select CrimeData.CrimeYear;
                 int numYear = yearData.Count();
                 int begYear = yearData.Max();
                 int endYear = yearData.Min();
