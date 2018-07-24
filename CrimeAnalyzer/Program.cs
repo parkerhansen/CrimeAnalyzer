@@ -144,8 +144,14 @@ namespace CrimeAnalyzer
                 var avgMurders = from x in crimeData select x.CrimeMurder;
                 report.WriteLine("Average murder per year (all years): {0}", avgMurders.Average());
 
+                avgMurders = from x in crimeData where x.CrimeYear >= 1994 && x.CrimeYear <= 1997 select x.CrimeMurder;
+                report.WriteLine("Average murder per year (1994-1997): {0}", avgMurders.Average());
+
+                avgMurders = from x in crimeData where x.CrimeYear >= 2010 && x.CrimeYear <= 2014 select x.CrimeMurder;
+                report.WriteLine("Average murder per year (2010-2014): {0}", avgMurders.Average());
 
 
+                Console.WriteLine("{0} has been created", rFile);
             }
 
             catch (Exception e)
