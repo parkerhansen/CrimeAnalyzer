@@ -128,7 +128,7 @@ namespace CrimeAnalyzer
                 }
                 report.Write(data.Substring(0, data.Length - 2));
 
-                var violentCrimeData = from x in crimeData where x.CrimeYear == 2010 select new { x.CrimeVC, x.CrimePop };
+                var violentCrimeData = from x in crimeData where x.CrimeYear == 2010 select new { x.CrimeVC , x.CrimePop };
                 double z = 0, y = 0;
                 foreach(var vcCrime in violentCrimeData)
                 {
@@ -153,6 +153,10 @@ namespace CrimeAnalyzer
                 var theftData = from x in crimeData where x.CrimeYear >= 1999 && x.CrimeYear <= 2004 select x.CrimeTheft;
                 report.WriteLine("Minimum thefts per year (1999-2004): {0}", theftData.Min());
                 report.WriteLine("Maximum thefts per year (1999-2004): {0}", theftData.Max());
+
+                var mvTheftData = (from x in crimeData orderby x.CrimeMVTheft descending select new { x.CrimeYear , x.CrimeMVTheft }).FirstOrDefault();
+                report.WriteLine("Year of highest number of motor vehicle thefts: {0}", mvTheftData.CrimeYear);
+
 
 
 
