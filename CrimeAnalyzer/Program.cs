@@ -7,17 +7,17 @@ namespace CrimeAnalyzer
 {
     public class CrimeData
     {
-        public int CrimeYear { get; set; }
-        public int CrimePop { get; set; }
-        public int CrimeVC { get; set; }
-        public int CrimeMurder { get; set; }
-        public int CrimeRape { get; set; }
-        public int CrimeRobbery { get; set; }
-        public int CrimeAggA { get; set; }
-        public int CrimePC { get; set; }
-        public int CrimeBurg { get; set; }
-        public int CrimeTheft { get; set; }
-        public int CrimeMVTheft { get; set; }
+        public int CrimeYear;
+        public int CrimePop;
+        public int CrimeVC;
+        public int CrimeMurder;
+        public int CrimeRape;
+        public int CrimeRobbery;
+        public int CrimeAggA;
+        public int CrimePC;
+        public int CrimeBurg;
+        public int CrimeTheft;
+        public int CrimeMVTheft;
     }
 
     class Program
@@ -31,7 +31,7 @@ namespace CrimeAnalyzer
                 return;
             }
 
-            string sFile = args[2];
+            string sFile = args[0];
             string rFile = args[1];
 
             List<CrimeData> crimeData = new List<CrimeData>();
