@@ -44,7 +44,6 @@ namespace CrimeAnalyzer
                 sourceFile.ReadLine();
 
                 while(!sourceFile.EndOfStream)
-//                while(sourceFile.EndOfStream == true)
                 {
 
                     string row = sourceFile.ReadLine();
@@ -92,12 +91,12 @@ namespace CrimeAnalyzer
                 }
             }
 
-            //CreateReport(crimeData, rFile);
+            /*CreateReport(crimeData, rFile);
 
 //        }
 
 //        public static void CreateReport<CrimeStats>(List<CrimeStats> data, string rFile)
-//        {
+        {*/
             StreamWriter report = null;
 
             try
@@ -109,15 +108,25 @@ namespace CrimeAnalyzer
                 int numYear = yearData.Count();
                 int begYear = yearData.Max();
                 int endYear = yearData.Min();
-//                report.WriteLine("{0}", yearData);
                 report.WriteLine("Period: {0}-{1} ({2} years)", begYear, endYear, numYear);
 
                 var murderData = from x in crimeData where x.CrimeMurder < 15000 select x.CrimeYear;
-                report.Write("Years murders per year < 15000: ");
+                report.Write("Years where murders per year < 15000: ");
+                string data = " ";
                 foreach(var year in murderData)
                 {
-                    report.Write("{0}, ", year);
+                    data += string.Format("{0}, ", year);
                 }
+                report.Write(data.Substring(0, data.Length - 2));
+
+                var robberyData = from x in crimeData where x.CrimeRobbery > 500000 select new { x.CrimeYear, x.CrimeRobbery };
+                report.Write("\nRobberies per year > 500000:");
+                data = " ";
+                foreach(var year in robberyData)
+                {
+                    data += string.Format("{0} = {1}, ", year.CrimeYear, year.CrimeRobbery);
+                }
+                report.Write(data.Substring(0, data.Length - 2));
 
             }
 
