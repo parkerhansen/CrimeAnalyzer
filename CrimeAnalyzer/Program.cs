@@ -91,12 +91,6 @@ namespace CrimeAnalyzer
                 }
             }
 
-            /*CreateReport(crimeData, rFile);
-
-//        }
-
-//        public static void CreateReport<CrimeStats>(List<CrimeStats> data, string rFile)
-        {*/
             StreamWriter report = null;
 
             try
