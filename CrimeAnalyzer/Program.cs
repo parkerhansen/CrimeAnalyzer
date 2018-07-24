@@ -108,12 +108,12 @@ namespace CrimeAnalyzer
 
                 var yearData = from x in crimeData select x.CrimeYear;
                 int numYear = yearData.Count();
-                int begYear = yearData.Max();
-                int endYear = yearData.Min();
+                int begYear = yearData.Min();
+                int endYear = yearData.Max();
                 report.WriteLine("Period: {0}-{1} ({2} years)", begYear, endYear, numYear);
 
                 var murderData = from x in crimeData where x.CrimeMurder < 15000 select x.CrimeYear;
-                report.Write("Years where murders per year < 15000: ");
+                report.Write("\nYears where murders per year < 15000: ");
                 string data = " ";
                 foreach(var year in murderData)
                 {
@@ -149,8 +149,8 @@ namespace CrimeAnalyzer
                 avgMurdersData = from x in crimeData where x.CrimeYear >= 1994 && x.CrimeYear <= 1997 select x.CrimeMurder;
                 report.WriteLine("Average murder per year (1994-1997): {0}", avgMurdersData.Average());
 
-                avgMurdersData = from x in crimeData where x.CrimeYear >= 2010 && x.CrimeYear <= 2014 select x.CrimeMurder;
-                report.WriteLine("Average murder per year (2010-2014): {0}", avgMurdersData.Average());
+                avgMurdersData = from x in crimeData where x.CrimeYear >= 2010 && x.CrimeYear <= 2013 select x.CrimeMurder;
+                report.WriteLine("Average murder per year (2010-2013): {0}", avgMurdersData.Average());
 
                 var theftData = from x in crimeData where x.CrimeYear >= 1999 && x.CrimeYear <= 2004 select x.CrimeTheft;
                 report.WriteLine("Minimum thefts per year (1999-2004): {0}", theftData.Min());
