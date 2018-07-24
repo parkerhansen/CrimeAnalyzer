@@ -139,7 +139,10 @@ namespace CrimeAnalyzer
                     z = popCrime.CrimePop;
                 }
                 double vcPerCap = y / z;
-                report.Write("\nViolent crime per capita rate (2010): {0}", vcPerCap);
+                report.WriteLine("\nViolent crime per capita rate (2010): {0}", vcPerCap);
+
+                var avgMurders = from x in crimeData select x.CrimeMurder;
+                report.WriteLine("Average murder per year (all years): {0}", avgMurders.Average());
 
 
 
