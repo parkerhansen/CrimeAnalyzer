@@ -55,10 +55,10 @@ namespace CrimeAnalyzer
                     string row = sourceFile.ReadLine();
                     string[] column = row.Split(',');
 
-                    if (column.Length < 11 || column.Length > 11)
+                    if (column.Length < 11)
                     {
-                        Console.WriteLine("Row {0} contains {1} values. Each row should have 11 data elements.", count, column.Length);
-                        continue;
+                        Console.WriteLine("Error: Row {0} of data contains {1} values. Each row should have 11 data elements. Fix and try again, report was not created.", count, column.Length);
+                        return;
                     }
 
                     int year = int.Parse(column[0]);
@@ -81,13 +81,13 @@ namespace CrimeAnalyzer
 
             catch (FormatException)
             {
-                Console.WriteLine("Error: Source file contains data that is not of the right type. Make sure all data is numerical.");
+                Console.WriteLine("Error: Source file contains data that is not of the right type. Make sure all data is numerical. Report was not created.");
                 return;
             }
 
             catch (Exception)
             {
-                Console.WriteLine("Error: Source file can't be opened.");
+                Console.WriteLine("Error: Source file can't be opened. Report was not created.");
                 return;
             }
 
