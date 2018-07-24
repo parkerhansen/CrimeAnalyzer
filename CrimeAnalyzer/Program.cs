@@ -43,8 +43,10 @@ namespace CrimeAnalyzer
                 sourceFile = new StreamReader(sFile);
                 sourceFile.ReadLine();
 
-                while(sourceFile.EndOfStream == true)
+                while(!sourceFile.EndOfStream)
+//                while(sourceFile.EndOfStream == true)
                 {
+
                     string row = sourceFile.ReadLine();
                     string[] column = row.Split(',');
 
@@ -66,8 +68,7 @@ namespace CrimeAnalyzer
                         continue;
                     }
 
-                    CrimeData crimes = new CrimeData() { CrimeYear = year, CrimePop = population, CrimeVC = violentCrime, CrimeMurder = murder, CrimeRape = rape, CrimeRobbery = robbery, CrimeAggA = aggravatedAssault, CrimePC = propertyCrime, CrimeBurg = burglary, CrimeTheft = theft, CrimeMVTheft = mvTheft  };
-                    crimeData.Add(crimes);
+                    crimeData.Add(new CrimeData() { CrimeYear = year, CrimePop = population, CrimeVC = violentCrime, CrimeMurder = murder, CrimeRape = rape, CrimeRobbery = robbery, CrimeAggA = aggravatedAssault, CrimePC = propertyCrime, CrimeBurg = burglary, CrimeTheft = theft, CrimeMVTheft = mvTheft  });
                 }
             }
 
@@ -102,13 +103,21 @@ namespace CrimeAnalyzer
             try
             {
                 report = new StreamWriter(rFile);
-                report.WriteLine("Crime Analyzer Report");
+                report.WriteLine("Crime Analyzer Report\n");
 
-                var yearData = from CrimeData in crimeData select CrimeData.CrimeYear;
+                var yearData = from x in crimeData select x.CrimeYear;
                 int numYear = yearData.Count();
                 int begYear = yearData.Max();
                 int endYear = yearData.Min();
+//                report.WriteLine("{0}", yearData);
                 report.WriteLine("Period: {0}-{1} ({2} years)", begYear, endYear, numYear);
+
+                var murderData = from x in crimeData where x.CrimeMurder < 15000 select x.CrimeYear;
+                report.Write("Years murders per year < 15000: ");
+                foreach(var year in murderData)
+                {
+                    report.Write("{0}, ", year);
+                }
 
             }
 
@@ -119,10 +128,7 @@ namespace CrimeAnalyzer
 
             finally
             {
-                if (report != null)
-                {
                     report.Close();
-                }
             }
         }
     }
