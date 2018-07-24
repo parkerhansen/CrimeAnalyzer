@@ -119,7 +119,7 @@ namespace CrimeAnalyzer
                 }
                 report.Write(data.Substring(0, data.Length - 2));
 
-                var robberyData = from x in crimeData where x.CrimeRobbery > 500000 select new { x.CrimeYear, x.CrimeRobbery };
+                var robberyData = from x in crimeData where x.CrimeRobbery > 500000 select new { x.CrimeYear , x.CrimeRobbery };
                 report.Write("\nRobberies per year > 500000:");
                 data = " ";
                 foreach(var year in robberyData)
@@ -127,6 +127,21 @@ namespace CrimeAnalyzer
                     data += string.Format("{0} = {1}, ", year.CrimeYear, year.CrimeRobbery);
                 }
                 report.Write(data.Substring(0, data.Length - 2));
+
+                var violentCrimeData = from x in crimeData where x.CrimeYear == 2010 select new { x.CrimeVC, x.CrimePop };
+                double z = 0, y = 0;
+                foreach(var vcCrime in violentCrimeData)
+                {
+                    y = vcCrime.CrimeVC;
+                }
+                foreach(var popCrime in violentCrimeData)
+                {
+                    z = popCrime.CrimePop;
+                }
+                double vcPerCap = y / z;
+                report.Write("\nViolent crime per capita rate (2010): {0}", vcPerCap);
+
+
 
             }
 
