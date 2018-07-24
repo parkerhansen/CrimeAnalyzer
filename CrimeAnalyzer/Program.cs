@@ -141,14 +141,19 @@ namespace CrimeAnalyzer
                 double vcPerCap = y / z;
                 report.WriteLine("\nViolent crime per capita rate (2010): {0}", vcPerCap);
 
-                var avgMurders = from x in crimeData select x.CrimeMurder;
-                report.WriteLine("Average murder per year (all years): {0}", avgMurders.Average());
+                var avgMurdersData = from x in crimeData select x.CrimeMurder;
+                report.WriteLine("Average murder per year (all years): {0}", avgMurdersData.Average());
 
-                avgMurders = from x in crimeData where x.CrimeYear >= 1994 && x.CrimeYear <= 1997 select x.CrimeMurder;
-                report.WriteLine("Average murder per year (1994-1997): {0}", avgMurders.Average());
+                avgMurdersData = from x in crimeData where x.CrimeYear >= 1994 && x.CrimeYear <= 1997 select x.CrimeMurder;
+                report.WriteLine("Average murder per year (1994-1997): {0}", avgMurdersData.Average());
 
-                avgMurders = from x in crimeData where x.CrimeYear >= 2010 && x.CrimeYear <= 2014 select x.CrimeMurder;
-                report.WriteLine("Average murder per year (2010-2014): {0}", avgMurders.Average());
+                avgMurdersData = from x in crimeData where x.CrimeYear >= 2010 && x.CrimeYear <= 2014 select x.CrimeMurder;
+                report.WriteLine("Average murder per year (2010-2014): {0}", avgMurdersData.Average());
+
+                var theftData = from x in crimeData where x.CrimeYear >= 1999 && x.CrimeYear <= 2004 select x.CrimeTheft;
+                report.WriteLine("Minimum thefts per year (1999-2004): {0}", theftData.Min());
+                report.WriteLine("Maximum thefts per year (1999-2004): {0}", theftData.Max());
+
 
 
                 Console.WriteLine("{0} has been created", rFile);
