@@ -34,6 +34,8 @@ namespace CrimeAnalyzer
             string sFile = args[0];
             string rFile = args[1];
 
+            int count = 1;
+
             List<CrimeData> crimeData = new List<CrimeData>();
 
             StreamReader sourceFile = null;
@@ -45,9 +47,14 @@ namespace CrimeAnalyzer
 
                 while(!sourceFile.EndOfStream)
                 {
-
                     string row = sourceFile.ReadLine();
                     string[] column = row.Split(',');
+
+                    if (column.Length < 11 || column.Length > 11)
+                    {
+                        Console.WriteLine("Row {0} contains {1} values. Each row should have 11 data elements.", count, column.Length);
+                        continue;
+                    }
 
                     int year = int.Parse(column[0]);
                     int population = int.Parse(column[1]);
@@ -61,13 +68,9 @@ namespace CrimeAnalyzer
                     int theft = int.Parse(column[9]);
                     int mvTheft = int.Parse(column[10]);
 
-                    if (column.Length < 11 || column.Length > 11)
-                    {
-                        Console.WriteLine("Row does not contain the correct number of data elements. Each row should have 11 data elements.");
-                        continue;
-                    }
-
                     crimeData.Add(new CrimeData() { CrimeYear = year, CrimePop = population, CrimeVC = violentCrime, CrimeMurder = murder, CrimeRape = rape, CrimeRobbery = robbery, CrimeAggA = aggravatedAssault, CrimePC = propertyCrime, CrimeBurg = burglary, CrimeTheft = theft, CrimeMVTheft = mvTheft  });
+
+                    count++;
                 }
             }
 
@@ -150,7 +153,6 @@ namespace CrimeAnalyzer
 
                 var mvTheftData = (from x in crimeData orderby x.CrimeMVTheft descending select new { x.CrimeYear , x.CrimeMVTheft }).FirstOrDefault();
                 report.WriteLine("Year of highest number of motor vehicle thefts: {0}", mvTheftData.CrimeYear);
-
 
 
 
