@@ -25,9 +25,14 @@ namespace CrimeAnalyzer
 
         static void Main(string[] args)
         {
-            if (args.Length < 2 || args.Length > 2)
+            if (args.Length < 2)
             {
                 Console.WriteLine("Not enough arguments. Please enter a source file and report file.");
+                return;
+            }
+            else if (args.Length > 2)
+            {
+                Console.WriteLine("Too many arguments. Please only enter a source file and report file.");
                 return;
             }
 
